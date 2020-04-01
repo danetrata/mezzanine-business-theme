@@ -35,21 +35,20 @@
 {% endifinstalled %}
 
 <link rel="stylesheet" href="{% static "css/business-theme.css" %}">
-
+{% block extra_css %}{% endblock %}
 {% endcompress %}
 
 {% with 'media/uploads/'|add:request.path|add:'base.css' as css_static %}
     <link rel="stylesheet" href="{% static css_static %}">
 {% endwith %}
-{% block extra_css %}{% endblock %}
 
 {% compress js %}
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 <script src="{% static "js/bootstrap.js" %}"></script>
 <script src="{% static "js/bootstrap-extras.js" %}"></script>
+{% block extra_js %}{% endblock %}
 {% endcompress %}
 
-{% block extra_js %}{% endblock %}
 
 <!--[if lt IE 9]>
 <script src="{% static "js/html5shiv.js" %}"></script>
