@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
-{% load pages_tags mezzanine_tags i18n future staticfiles sitewide_tags %}
+{% load pages_tags mezzanine_tags i18n staticfiles sitewide_tags %}
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -19,7 +19,11 @@
 <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
 <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
-<link rel="stylesheet" href="{% static "css/business-theme.css" %}">
+
+<link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+<link href="{% static "css/prettyPhoto.css" %}" rel="stylesheet">
+<link href="{% static "css/animate.css" %}" rel="stylesheet">
+
 {% if LANGUAGE_BIDI %}
 <link rel="stylesheet" href="{% static "css/rtl.css" %}">
 {% endif %}
@@ -29,6 +33,13 @@
 <link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
 {% endif %}
 {% endifinstalled %}
+
+<link rel="stylesheet" href="{% static "css/business-theme.css" %}">
+
+{% with 'media/uploads/'|add:request.path|add:'base.css' as css_static %}
+    <link rel="stylesheet" href="{% static css_static %}">
+{% endwith %}
+
 {% block extra_css %}{% endblock %}
 {% endcompress %}
 
@@ -36,6 +47,7 @@
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 <script src="{% static "js/bootstrap.js" %}"></script>
 <script src="{% static "js/bootstrap-extras.js" %}"></script>
+
 {% block extra_js %}{% endblock %}
 {% endcompress %}
 
@@ -165,6 +177,10 @@
 
 <div class="row">
 <p class="site-info text-center">
+    {% trans "Site by " %}
+    <a href="https://danetrata.com">Dan Etrata</a>
+    <span class="separator">|</span>
+    {% trans "Based on a theme by " %}
     <a href="http://skyfalk.ru">SkyFalk web studio</a>
     <span class="separator">|</span>
     {% trans "Powered by" %}

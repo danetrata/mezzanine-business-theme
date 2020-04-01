@@ -19,6 +19,9 @@ Requirements:
 Quick start
 ===========
 
+0. pip install git+https://github.com/dfalk/mezzanine-business-theme.git
+    echo git+https://github.com/dfalk/mezzanine-business-theme.git >> requirements.txt
+
 1. Add "business_theme" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = (
@@ -27,8 +30,9 @@ Quick start
     )
     
 2. Create database tables::
+    python manage.py makemigrations business_theme
 
-    python manage.py syncdb
+    python manage.py migrate
     
 3. Add "SitewideContent" to your ADMIN_MENU_ORDER setting like this::
 

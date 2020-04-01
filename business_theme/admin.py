@@ -4,7 +4,7 @@
 from django.contrib import admin
 
 from mezzanine.core.admin import TabularDynamicInlineAdmin
-from mezzanine.core.admin import SingletonAdmin
+from mezzanine.utils.admin import SingletonAdmin
 from mezzanine.pages.admin import PageAdmin
 
 from business_theme.models import HomePage, Slide, IconBlurb, SitewideContent

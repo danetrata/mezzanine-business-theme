@@ -1,6 +1,17 @@
 {% extends "base.html" %}
-{% load i18n mezzanine_tags %}
+{% load i18n mezzanine_tags staticfiles %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/index.css" %}">
+<link rel="stylesheet" href="{% static "media/uploads/index.css" %}">
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static "js/index.js" %}"></script>
+<script src="{% static "js/jquery.prettyPhoto.js" %}"></script>
+<script src="{% static "js/jquery.isotope.min.js" %}"></script>
+{% endblock %}
 {% block meta_title %}{% if page.meta_title %}{{ page.meta_title }}{% else %}{{ settings.SITE_TITLE }}{% if settings.SITE_TAGLINE %} - {{ settings.SITE_TAGLINE }}{% endif %}{% endif %}{% endblock %}
 
 {% block meta_description %}{% if page.description %}{{ page.description }}{% endif %}{% endblock %}
@@ -8,7 +19,36 @@
 {% block meta_keywords %}{% if page.meta_keywords %}{{ page.meta_keywords }}{% endif %}{% endblock %}
 
 {% block all_content %}
+{% if page.homepage.slides.all %}
+<section class="no-margin">
+        <div class="carousel slide wet-asphalt" data-ride="carousel" id="main-slider">
+            <ol class="carousel-indicators">
+                {% for slide in page.homepage.slides.all %}
+                    
+                <li data-slide-to="{{ forloop.counter0 }}" data-target="#main-slider" {% if forloop.first %}class="active"{% endif %}></li>
+ 
+                 {% endfor %}  
 
+            </ol>
+            <div class="carousel-inner" role="listbox">
+				 {% for slide in page.homepage.slides.all %}
+                <div style="background-image: url({{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %})" class="item{% if forloop.first %} active{% endif %}">
+                    <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 450 %}"></img>
+                </div><!--/.item-->
+ 
+                 {% endfor %}  
+            </div><!--/.carousel-inner-->
+            <a data-slide="prev" href="#main-slider" class="prev hidden-xs left carousel-control" role="button">
+                <i class="icon-angle-left"></i>
+            </a>
+            <a data-slide="next" href="#main-slider" class="next hidden-xs right carousel-control" role="button">
+                <i class="icon-angle-right"></i>
+            </a>
+        </div><!--/.carousel-->
+
+ </section>   
+
+{% endif %}
     <div class="jumbotron">
     <div class="container">
         <div class="row"><div class="col-md-12">
@@ -20,7 +60,9 @@
         </div></div>
     </div>
     </div>
-    
+
+
+
     <div id="iconbox" class="section">
     <div class="container">
       {% if page.homepage.iconbox_heading %}
@@ -35,17 +77,24 @@
       <div class="row" id="iconbox-blurbs">
         {% if page.homepage.blurbs.all %}
             {% for iconblurb in page.homepage.blurbs.all %}
+
             <div class="blurb col-md-4">
+
               {% if iconblurb.icon %}
               <div class="blurb-img">
               <a href="{{ iconblurb.link }}"><img src="{{ MEDIA_URL }}{% thumbnail iconblurb.icon 200 0 %}" /></a>
               </div>
               {% endif %}
+              {% editable iconblurb.title iconblurb.content iconblurb.link %}
               <h3>{{ iconblurb.title }}</h3>
                <p class="blurb-content">{{ iconblurb.content }}</p>
                {% if iconblurb.link %}<p><a class="btn btn-default" href="{{ iconblurb.link }}">{% trans "View details" %} &raquo;</a></p>{% endif %}
+               {% endeditable %}
+
             </div>
+
             {% endfor %}
+
         {% endif %}
       </div>
     </div>
