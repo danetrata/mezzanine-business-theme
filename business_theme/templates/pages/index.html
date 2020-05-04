@@ -2,6 +2,23 @@
 {% load i18n mezzanine_tags staticfiles %}
 
 {% block extra_css %}
+<style>
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 100%;
+}
+.carousel {
+  max-height: 700px;
+  overflow: hidden;
+
+
+}
+.carousel-inner{overflow:visible}
+.item img {
+    width: 100%;
+    height: auto;
+  }
+</style>
 <link rel="stylesheet" href="{% static "css/index.css" %}">
 {% endblock %}
 
@@ -13,7 +30,15 @@
 <script src="{% static "js/index.js" %}"></script>
 <script src="{% static "js/jquery.prettyPhoto.js" %}"></script>
 <script src="{% static "js/jquery.isotope.min.js" %}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#main-slider').carousel({
+        interval: 10000
+      })
+    });    
+  </script>
 {% endblock %}
+
 {% block meta_title %}{% if page.meta_title %}{{ page.meta_title }}{% else %}{{ settings.SITE_TITLE }}{% if settings.SITE_TAGLINE %} - {{ settings.SITE_TAGLINE }}{% endif %}{% endif %}{% endblock %}
 
 {% block meta_description %}{% if page.description %}{{ page.description }}{% endif %}{% endblock %}
@@ -23,34 +48,40 @@
 {% block all_content %}
 {% if page.homepage.slides.all %}
 <section class="no-margin">
-        <div class="carousel slide wet-asphalt" data-ride="carousel" id="main-slider">
+        <div class="carousel slide" data-ride="carousel" id="main-slider">
+            <div class="carousel-outer">
+                <div class="carousel-inner">
+                    {% for slide in page.homepage.slides.all %}
+                   <div class="item{% if forloop.first %} active{% endif %}">
+                       <img src="{{ MEDIA_URL }}{{ slide.image }}"></img>
+                   </div><!--/.item-->
+    
+                    {% endfor %}  
+               </div><!--/.carousel-inner-->
+               {% if page.homepage.slides.all|length >= 2 %}
+               <a data-slide="prev" href="#main-slider" class="hidden-xs left carousel-control" role="button">
+                <span class='glyphicon glyphicon-chevron-left'></span>
+               </a>
+               <a data-slide="next" href="#main-slider" class="hidden-xs right carousel-control" role="button">
+                <span class='glyphicon glyphicon-chevron-right'></span>
+               </a>
+               {% endif %}
+            </div>
+
+
             {% if page.homepage.slides.all|length >= 2 %}
             <ol class="carousel-indicators">
                 {% for slide in page.homepage.slides.all %}
                     
-                <li data-slide-to="{{ forloop.counter0 }}" data-target="#main-slider" {% if forloop.first %}class="active"{% endif %}></li>
- 
+                <li data-slide-to="{{ forloop.counter0 }}" data-target="#main-slider" {% if forloop.first %}class="active"{% endif %}>
+                    <img src="{{ MEDIA_URL }}{% thumbnail slide.image 200 0 %}"></img>
+                </li>
+    
                 {% endfor %}  
-
+    
             </ol>
             {% endif %}
 
-            <div class="carousel-inner" role="listbox">
-				 {% for slide in page.homepage.slides.all %}
-                <div style="background-image: url({{ MEDIA_URL }}{% thumbnail slide.image 1920 690 %})" class="item{% if forloop.first %} active{% endif %}">
-                    <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 450 %}"></img>
-                </div><!--/.item-->
- 
-                 {% endfor %}  
-            </div><!--/.carousel-inner-->
-            {% if page.homepage.slides.all|length >= 2 %}
-            <a data-slide="prev" href="#main-slider" class="prev hidden-xs left carousel-control" role="button">
-                <i class="icon-angle-left"></i>
-            </a>
-            <a data-slide="next" href="#main-slider" class="next hidden-xs right carousel-control" role="button">
-                <i class="icon-angle-right"></i>
-            </a>
-            {% endif %}
         </div><!--/.carousel-->
 
  </section>   
