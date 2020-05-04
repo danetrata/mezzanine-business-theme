@@ -7,12 +7,12 @@
 .carousel-inner > .item > a > img {
     width: 100%;
 }
-.carousel {
+/* .carousel {
   max-height: 700px;
   overflow: hidden;
 
 
-}
+} */
 .carousel-inner{overflow:visible}
 .item img {
     width: 100%;
@@ -125,7 +125,7 @@
               {% endif %}
               {% editable iconblurb.title iconblurb.content iconblurb.link %}
               <h3>{{ iconblurb.title }}</h3>
-               <p class="blurb-content">{{ iconblurb.content }}</p>
+               <p class="blurb-content">{{ iconblurb.content|richtext_filters|safe  }}</p>
                {% if iconblurb.link %}<p><a class="btn btn-default" href="{{ iconblurb.link }}">{% trans "View details" %} &raquo;</a></p>{% endif %}
                {% endeditable %}
 
