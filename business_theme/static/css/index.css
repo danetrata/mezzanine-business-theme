@@ -6,6 +6,14 @@
     background-color: lightblue;
   }
 
+  .jumbotron h1 {
+    font-family: 'Charmonman', cursive;
+  }
+  .jumbotron p {
+    font-family: 'Roboto', sans-serif;
+  }
+
+
   #main-slider {
     position: relative;
   }
