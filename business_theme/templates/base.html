@@ -15,6 +15,8 @@
 <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
 {% endifinstalled %}
 
+<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+
 {% compress css %}
 <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
@@ -35,7 +37,6 @@
 {% endifinstalled %}
 
 <link rel="stylesheet" href="{% static "css/business-theme.css" %}">
-<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
 {% block extra_css %}{% endblock %}
 {% endcompress %}
 
