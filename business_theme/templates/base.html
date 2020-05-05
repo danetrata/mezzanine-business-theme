@@ -180,17 +180,7 @@
 <p class="site-info text-center">
     {% trans "Site by " %}
     <a href="https://danetrata.com">Dan Etrata</a>
-    <span class="separator">|</span>
-    {% trans "Based on a theme by " %}
-    <a href="http://skyfalk.ru">SkyFalk web studio</a>
-    <span class="separator">|</span>
-    {% trans "Powered by" %}
-    <a href="http://mezzanine.jupo.org">Mezzanine</a>{% ifinstalled cartridge.shop %},
-    <a href="http://cartridge.jupo.org">Cartridge</a>{% endifinstalled %}
-    {% trans "and" %}
-    <a href="http://www.djangoproject.com">Django</a>
-    <span class="separator">|</span>
-    {% trans "Theme by" %} <a target="_blank" href="http://getbootstrap.com">Bootstrap</a>
+
     {% ifinstalled mezzanine.mobile %}
     <span class="separator">|</span>
     <a href="{% url "set_device" "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>

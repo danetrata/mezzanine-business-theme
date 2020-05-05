@@ -57,11 +57,12 @@
         </div></div>
     </div>
     </div>
+
 {% if page.homepage.slides.all %}
 <section class="no-margin">
         <div class="carousel slide" data-ride="carousel" id="main-slider">
             <div class="carousel-outer">
-                <div class="carousel-inner">
+                <div class="carousel-inner" role="listbox">
                     {% for slide in page.homepage.slides.all %}
                    <div class="item{% if forloop.first %} active{% endif %}">
                        <img src="{{ MEDIA_URL }}{% thumbnail slide.image 1920 500 %}"></img>
@@ -70,10 +71,10 @@
                     {% endfor %}  
                </div><!--/.carousel-inner-->
                {% if page.homepage.slides.all|length >= 2 %}
-               <a data-slide="prev" href="#main-slider" class="hidden-xs left carousel-control" role="button">
+               <a data-slide="prev" data-target="#main-slider" class="hidden-xs left carousel-control" role="button">
                 <span class='glyphicon glyphicon-chevron-left'></span>
                </a>
-               <a data-slide="next" href="#main-slider" class="hidden-xs right carousel-control" role="button">
+               <a data-slide="next" data-target="#main-slider" class="hidden-xs right carousel-control" role="button">
                 <span class='glyphicon glyphicon-chevron-right'></span>
                </a>
                {% endif %}

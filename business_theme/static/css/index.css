@@ -16,6 +16,8 @@
 
   #main-slider {
     position: relative;
+    overflow: hidden;
+
   }
   #main-slider .carousel h2 {
     font-size: 36px;
@@ -44,6 +46,7 @@
     -moz-transition: opacity ease-in-out 500ms;
     -o-transition: opacity ease-in-out 500ms;
     transition: opacity ease-in-out 500ms;
+    overflow: hidden;
   }
   #main-slider .carousel .item:first-child {
     top: auto;
